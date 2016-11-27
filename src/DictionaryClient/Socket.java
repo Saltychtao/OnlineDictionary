@@ -33,7 +33,7 @@ public class Socket {
 			java.net.Socket client = new java.net.Socket(serverName,port);
 			 DataInputStream cinputstream = new DataInputStream(client.getInputStream());   
 			 DataOutputStream coutputstream = new DataOutputStream(client.getOutputStream());   
-			 coutputstream.writeUTF(keyword + "##" + String.valueOf(dicType));
+			 coutputstream.writeUTF("#2" + "#" + String.valueOf(dicType) + "#" + keyword);
 			 String explanation = new String (cinputstream.readUTF());   
 			 result = explanation; 
 			 
