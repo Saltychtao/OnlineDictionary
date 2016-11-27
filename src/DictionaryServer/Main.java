@@ -1,7 +1,7 @@
 package DictionaryServer;
 public class Main {
 	  public static void main(String[] args) {
-	      BaiduMain.BaiduTranslate("graph");
+	      BaiduMain.BaiduTranslate("computer");
 		  YoudaoMain.YoudaoTranslate("graph");
 	    }
 }

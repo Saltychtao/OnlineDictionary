@@ -1,8 +1,68 @@
 package DictionaryClient;
 import java.util.*;
-public class UI {
-
-	public static void main(String[] args) {
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+public class UI extends JFrame{
+	
+	private resultPanel rp1;
+	private resultPanel rp2;
+	private resultPanel rp3;
+	private WordInputPanel wip;
+	
+	public UI()
+	{
+		setTitle("MainUI");
+		setLocation(300, 100);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setLayout(new BorderLayout(10,10));
+		
+		rp1 = new resultPanel();
+		rp2 = new resultPanel();
+		rp3 = new resultPanel();
+		
+		wip = new WordInputPanel();
+	}
+	public class WordInputPanel extends JPanel
+	{
+		private JTextField jtfWord;
+		private JButton jbtSearch;
+		public WordInputPanel()
+		{
+			setOpaque(false);
+			jtfWord = new JTextField(30);
+			jbtSearch = new JButton("Search");
+			add(jtfWord);
+			add(jbtSearch);
+		}
+	}
+	
+	public class resultPanel extends JPanel
+	{
+		private JTextArea jtaResult;
+		public resultPanel()
+		{
+			setOpaque(false);
+			jtaResult = new JTextArea();
+			jtaResult.setOpaque(false);
+			add(jtaResult);
+		}
+		
+		public void setResult(String des)
+		{
+			if (des == "")
+			{
+				this.jtaResult.setText("");
+			}
+			else
+			this.jtaResult.setText(des);
+		}
+	}
+	public static int Main(String[] args) {
 		// TODO Auto-generated method stub
 		Socket client = new Socket();
 		String meaning = "no";
@@ -33,6 +93,13 @@ public class UI {
 		           
 		}
 		keyboard.close();
+		return 0;
 	}
 
+	
+	public static void main(String[] args)
+	{
+		UI ui = new UI();
+		
+	}
 }
