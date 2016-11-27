@@ -18,7 +18,7 @@ public class YoudaoMain {
     private static String keyfrom = "NjuDictionary";
     private static String key = "2037871503";
     
-    public static void YoudaoTranslate(String keyword)
+    public static String YoudaoTranslate(String keyword)
     {
 	CloseableHttpClient hc = HttpClientBuilder.create().build();
     HttpGet httpGet = new HttpGet();
@@ -43,6 +43,6 @@ public class YoudaoMain {
     object= object.getJSONObject("basic");
     String str= object.getString("explains");
     str=str.substring(2, str.length()-2);
-    System.out.println(str);
+    return str;
     }
 }

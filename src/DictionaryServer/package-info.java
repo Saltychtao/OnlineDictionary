@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author Absymheaven
+ * @author lhh
  *
  */
 package DictionaryServer;

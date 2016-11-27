@@ -32,7 +32,7 @@ public class TransApi {
         params.put("salt", salt);
 
    
-        String src = appid + query + salt + securityKey; // 加密前的原文
+        String src = appid + query + salt + securityKey; 
         params.put("sign", MD5.md5(src));
 
         return params;
