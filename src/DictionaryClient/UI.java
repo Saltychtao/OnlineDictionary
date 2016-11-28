@@ -24,20 +24,44 @@ public class UI extends JFrame{
 		rp1 = new resultPanel();
 		rp2 = new resultPanel();
 		rp3 = new resultPanel();
-		
+/*		
+		rp1.setBackground(Color.BLACK);
+		rp2.setBackground(Color.BLUE);
+		rp3.setBackground(Color.cyan);
+	*/	
 		wip = new WordInputPanel();
+		
+		add(wip,BorderLayout.NORTH);
+		add(rp1,BorderLayout.EAST);
+		add(rp2,BorderLayout.CENTER);
+		add(rp3,BorderLayout.WEST );
+		
+		setSize(800,600);
+		setVisible(true);
 	}
 	public class WordInputPanel extends JPanel
 	{
 		private JTextField jtfWord;
 		private JButton jbtSearch;
+		private JCheckBox jcb1;
+		private JCheckBox jcb2;
+		private JCheckBox jcb3;
 		public WordInputPanel()
 		{
 			setOpaque(false);
 			jtfWord = new JTextField(30);
 			jbtSearch = new JButton("Search");
+			jcb1 = new JCheckBox();
+			jcb1.setText("Baidu");
+			jcb2 = new JCheckBox();
+			jcb2.setText("Bing");
+			jcb3 = new JCheckBox();
+			jcb3.setText("Youdao");
 			add(jtfWord);
 			add(jbtSearch);
+			add(jcb1);
+			add(jcb2);
+			add(jcb3);
 		}
 	}
 	
@@ -46,10 +70,11 @@ public class UI extends JFrame{
 		private JTextArea jtaResult;
 		public resultPanel()
 		{
-			setOpaque(false);
-			jtaResult = new JTextArea();
-			jtaResult.setOpaque(false);
+			jtaResult = new JTextArea(25,20);
+			jtaResult.setEditable(false);
+
 			add(jtaResult);
+			
 		}
 		
 		public void setResult(String des)
