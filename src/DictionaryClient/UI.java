@@ -8,7 +8,6 @@ import java.awt.event.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 public class UI extends JFrame{
-	
 	private resultPanel rp1;
 	private resultPanel rp2;
 	private resultPanel rp3;
@@ -38,14 +37,52 @@ public class UI extends JFrame{
 		
 		setSize(800,600);
 		setVisible(true);
+		
+		wip.jbtSearch.addActionListener(new ActionListener (){
+			public void actionPerformed(ActionEvent e){
+				if (!wip.jcb1.isSelected() && !wip.jcb2.isSelected() && !wip.jcb3.isSelected())
+				{
+						Socket socket = new Socket();
+						String meaning1 = socket.get(wip.jtfWord.getText(), 1);
+						rp1.jtaResult.setText(meaning1);
+						String meaning2 = socket.get(wip.jtfWord.getText(), 2);
+						rp2.jtaResult.setText(meaning2);
+						String meaning3 = socket.get(wip.jtfWord.getText(), 3);
+						rp3.jtaResult.setText(meaning3);
+
+				}
+				else
+				{
+					if (wip.jcb1.isSelected())
+					{
+						Socket socket = new Socket();
+						String meaning1 = socket.get(wip.jtfWord.getText(), 1);
+						rp1.jtaResult.setText(meaning1);
+					}
+					if (wip.jcb2.isSelected())
+					{
+						Socket socket = new Socket();
+						String meaning2 = socket.get(wip.jtfWord.getText(), 2);
+						rp1.jtaResult.setText(meaning2);
+					}
+					if (wip.jcb3.isSelected())
+					{
+						Socket socket = new Socket();
+						String meaning3 = socket.get(wip.jtfWord.getText(), 3);
+						rp1.jtaResult.setText(meaning3);
+					}
+				}
+				;
+			}
+		});
 	}
 	public class WordInputPanel extends JPanel
 	{
 		private JTextField jtfWord;
 		private JButton jbtSearch;
-		private JCheckBox jcb1;
-		private JCheckBox jcb2;
-		private JCheckBox jcb3;
+		public JCheckBox jcb1;
+		public JCheckBox jcb2;
+		public JCheckBox jcb3;
 		public WordInputPanel()
 		{
 			setOpaque(false);
@@ -89,36 +126,7 @@ public class UI extends JFrame{
 	}
 	public static int Main(String[] args) {
 		// TODO Auto-generated method stub
-		Socket client = new Socket();
-		String meaning = "no";
-		Scanner keyboard=new Scanner(System.in);   
-		boolean exit=false;   
-		while(!exit)   
-		{   
-		    System.out.println("Please input a word");   
-		    System.out.println("If you want to exit, input the word: exit!");   
-		    String inputword=keyboard.nextLine();   
-		    if(inputword.equalsIgnoreCase("exit"))   
-		    {   
-		        exit=true;   
-		    }    
-		    else   
-		    {   
-		        meaning=client.get(inputword, 1)  ;
-		        if(meaning.equals("no"))   
-		        {   
-		        System.out.println("The dictionary does not have this word!");   
-		        }   
-		        else   
-		        {   
-		        System.out.println(inputword+" means "+meaning);   
-		            System.out.println();   
-		        }   
-		     }   
-		           
-		}
-		keyboard.close();
-		return 0;
+			return 0;
 	}
 
 	
