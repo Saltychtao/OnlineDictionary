@@ -1,12 +1,20 @@
 package DictionaryClient;
+import javafx.*;
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.awt.event.ActionEvent;
 import java.awt.event.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import javafx.application.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.*;
+
 public class UI extends JFrame{
 	
 	private resultPanel rp1;
@@ -99,7 +107,7 @@ public class UI extends JFrame{
 	
 	public static void main(String[] args)
 	{
-		UI ui = new UI();
+
 		
 	}
 }

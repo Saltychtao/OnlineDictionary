@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" fx:controller="DictionaryClient.LoginPaneController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <Pane id="BackgroudPanel" layoutX="11.0" layoutY="11.0" prefHeight="379.0" prefWidth="579.0">
+      <children>
+        <Label contentDisplay="CENTER" layoutX="151.0" layoutY="95.0" prefHeight="27.240234375" prefWidth="57.0" text="用户名:" textAlignment="CENTER" textFill="#33ff85" />
+        <TextArea id="userName" layoutX="208.0" layoutY="95.0" prefHeight="20.2402259277369" prefWidth="133.0" wrapText="true" />
+        <Label contentDisplay="CENTER" layoutX="151.0" layoutY="174.0" prefWidth="57.0" text="密码:" textFill="#00ff66" />
+        <TextArea id="password" layoutX="208.0" layoutY="162.0" prefHeight="20.240234375" prefWidth="133.0" wrapText="true" />
+        <Button id="register" layoutX="370.0" layoutY="99.0" mnemonicParsing="false" onAction="#registerOnAction" prefWidth="79.99990844726562" text="注册账号" textAlignment="CENTER" textFill="#4333ff" textOverrun="CLIP" />
+        <Button id="forgotPassword" layoutX="370.0" layoutY="169.0" mnemonicParsing="false" onAction="#forgetPasswordOnAction" prefWidth="79.99990844726562" text="忘记密码?" textAlignment="CENTER" textFill="#4333ff" textOverrun="CLIP" />
+        <Button id="login" cancelButton="false" defaultButton="true" layoutX="200.0" layoutY="255.0" mnemonicParsing="false" onAction="#loginOnAction" prefHeight="42.240234375" prefWidth="149.0" text="登录" />
+      </children>
+    </Pane>
+  </children>
+</AnchorPane>
