@@ -18,6 +18,7 @@ public class BaiduMain {
      String str = object.getString("trans_result");
      object = JSONObject.fromObject(str.substring(1, str.length()-1));
      str= object.getString("dst");
+    // System.out.println(str);
      return str;
     }
 }

@@ -82,7 +82,6 @@ public class Server {
 		// TODO Auto-generated method stub
 		  System.out.println("Loading user information");
 		  LoadUserInformation();
-		  
 		  System.out.println("Server is staring!");
 		  int i = 0;
 		  try   
@@ -101,6 +100,7 @@ public class Server {
 		      if(strs[1].equals("0"))
 		         {
 		    	   AddUser("users.txt",strs[2]+"	"+strs[3]+"	"+strs[4]+"\r\n");	
+		    	   soutputstream.writeUTF("#0#sign up success");
 		         }
 		      else if (strs[1].equals("1"))
 		        {
@@ -140,7 +140,7 @@ public class Server {
 		    	    { 
 		    	    	praise(3,strs[3]);
 		    	    }
-		        	soutputstream.writeUTF("#3#praise successfully");
+		        	soutputstream.writeUTF("#3#"+strs[3]+"praise successfully");
 		        }
 		      soutputstream.close();   
 		      soutputstream.close();   
