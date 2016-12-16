@@ -43,7 +43,7 @@ public class YoudaoMain {
     object= object.getJSONObject("basic");
     String str= object.getString("explains");
     str=str.substring(2, str.length()-2);
-   // System.out.println(str);
+    System.out.println(str);
     return str;
     }
 }
