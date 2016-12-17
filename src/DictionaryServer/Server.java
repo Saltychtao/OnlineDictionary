@@ -12,23 +12,7 @@ import java.io.IOException;
 public class Server {
     static String[][] users= new String[16][3];
     static int UserCount=0;
-    
-    private static void praise(int Dictype,String word)
-    {
-    	try {
-            FileWriter writer = new FileWriter("words.txt", true);
-            if(Dictype==1)
-            writer.write(word+"	1	0	0\r\n");
-            else if(Dictype==2)
-                writer.write(word+"	0	1	0\r\n");
-            else if(Dictype==3)
-                writer.write(word+"	0	0	1\r\n");
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    
+       
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		  System.out.println("Server is staring!");
@@ -79,15 +63,15 @@ public class Server {
 		        {	
 		    	    if(strs[2].equals("1"))
 		    	    {
-		    	    	praise(1,strs[3]);
+		    	    	DataBase.Praise(strs[3],1);
 		    	    }
 		    	    else if(strs[2].equals("2"))
 		    	    {
-		    	    	praise(2,strs[3]);
+		    	    	DataBase.Praise(strs[3],2);
 		    	    }
 		    	    else
 		    	    { 
-		    	    	praise(3,strs[3]);
+		    	    	DataBase.Praise(strs[3],3);
 		    	    }
 		        	soutputstream.writeUTF("#3#"+strs[3]+"praise successfully");
 		        }
