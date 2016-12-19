@@ -16,6 +16,16 @@ public class WordCards {
          {
         	 return WordSend;
          }
+         static String MakeOLlist()
+         {
+        	 String olist="";
+        	 for(int x=0;x<count;x++)
+        	 {
+                 olist=olist+"#"+olusers[count][0];           		 
+        	 }
+        	 return olist;
+        	 
+         }
          static public void insert(String username,String port)
          {
         	    System.out.println("add user");

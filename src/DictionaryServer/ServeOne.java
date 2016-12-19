@@ -27,11 +27,10 @@ public class ServeOne extends Thread{
 	}
 	
 	public void run(){
-		  System.out.println("Server is staring!"+ClientID);
 		  int i = 0;
 		  try   
 		  {    
-		    while ( i < 100) 
+		    while (i<10000) 
 		    { 
 		      WordCards.test();
 		      Socket SClient = socket.accept();   
@@ -45,16 +44,16 @@ public class ServeOne extends Thread{
 		    	  WordCards.sendFinished();
 		      }*/
 		      String keyword = new String(sinputstream.readUTF());   
-		      System.out.print("get word");
 		      String[] strs = keyword.split("#");
 		      if(strs[1].equals("0"))
 		         {
+		    	   System.out.println("Client:"+ClientID+"sign up");
 		    	   DataBase.SignUp(strs[2],strs[3],strs[4]);
 		    	   soutputstream.writeUTF("#0#sign up success");
-		    	 
 		         }
 		      else if (strs[1].equals("1"))
 		        { 
+		    	  System.out.println("Client:"+ClientID+"sign in");
 		    	  if(DataBase.SignIn(strs[2],strs[3]))
 		        	{
 		    		  soutputstream.writeUTF("#1#login success");
@@ -67,21 +66,23 @@ public class ServeOne extends Thread{
 		        }
 		      else if (strs[1].equals("2"))
 		        {	
+		    	  System.out.println("Client:"+ClientID+"translate");
 		    	    if(strs[2].equals("1"))
 		    	    {
-		    	    	soutputstream.writeUTF("#2#1"+BaiduMain.BaiduTranslate(strs[3])+"#"+DataBase.GetPraiseNum(strs[3], 1));
+		    	    	soutputstream.writeUTF(BaiduMain.BaiduTranslate(strs[3])+"#"+DataBase.GetPraiseNum(strs[3], 1));
 		    	    }
 		    	    else if(strs[2].equals("2"))
 		    	    {
-		    	    	soutputstream.writeUTF("#2#2"+YoudaoMain.YoudaoTranslate(strs[3])+"#"+DataBase.GetPraiseNum(strs[3], 2));
+		    	    	soutputstream.writeUTF(YoudaoMain.YoudaoTranslate(strs[3])+"#"+DataBase.GetPraiseNum(strs[3], 2));
 		    	    }
 		    	    else
 		    	    { 
-		        	     soutputstream.writeUTF("#2#3"+BingMain.BingTranslate(strs[3])+"#"+DataBase.GetPraiseNum(strs[3], 3));
+		        	     soutputstream.writeUTF(BingMain.BingTranslate(strs[3])+"#"+DataBase.GetPraiseNum(strs[3], 3));
 		    	    }
 		        }
 		      else if (strs[1].equals("3"))
 		        {	
+		    	  System.out.println("Client:"+ClientID+"sign praise");
 		    	    if(strs[2].equals("1"))
 		    	    {
 		    	    	DataBase.Praise(strs[3],1);
@@ -98,18 +99,37 @@ public class ServeOne extends Thread{
 		        }
 		      else if (strs[1].equals("4"))
 		        {	
+		    	   System.out.println("Client:"+ClientID+"send word card");
                     WordCards.sendWords(strs[2],strs[3],strs[4]);
-		        	soutputstream.writeUTF("#4# send word card successfully");
+		        	soutputstream.writeUTF("#4#send word card successfully");
 		        }
 		      else if (strs[1].equals("5"))
 		        {	
-                  WordCards.sendWords(strs[2],strs[3],strs[4]);
-		        	soutputstream.writeUTF("#4#send word card successfully");
+		    	    System.out.println("Client:"+ClientID+"search word card");
+                      if(WordCards.getPort()==(4500+ClientID))
+                      { 
+                    	  soutputstream.writeUTF("#4#"+WordCards.getWordSend()+"#"+WordCards.getSource());  
+    		    	      WordCards.sendFinished();
+                      }
+                    	  
 		        }
 		      else if (strs[1].equals("6"))
 		        {	
+		    	   System.out.println("Client:"+ClientID+"retrieve password");
                     SendMail.mail(DataBase.GetEmail(strs[2]),DataBase.GetPassword(strs[2]));
 		        	soutputstream.writeUTF("#6#mail has been sent");
+		        }
+		      else if (strs[1].equals("7"))
+		        {	
+		    	  System.out.println("Client:"+ClientID+"make online list");
+		    	  String ol=WordCards.MakeOLlist();
+		    	  soutputstream.writeUTF("#7"+ol);
+		        }
+		      else if (strs[1].equals("8"))
+		        {	
+		    	  System.out.println("Client:"+ClientID+"stop");
+                  WordCards.delete(strs[2],String.valueOf(4500+ClientID));
+                  
 		        }
 		      sinputstream.close();   
 		      soutputstream.close();   

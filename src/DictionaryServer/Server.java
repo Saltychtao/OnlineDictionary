@@ -16,7 +16,6 @@ public class Server extends Thread{
     static int ClientCount=0;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		SendMail.mail(DataBase.GetEmail("aaa"),DataBase.GetPassword("aaa"));
 		System.out.println("Server is staring!");
 		ServerSocket DictServer;
 		int i = 0;
