@@ -32,38 +32,61 @@ public class DataBase {
 	
 	static boolean SignIn(String name,String password)
 	{	  
-		boolean LoginFlag=false;
+      if(password.equals(GetPassword(name)))
+    	  return true;
+      else 
+    	  return false;
+		
+	}
+	
+	static String GetPassword(String username)
+	{ 
+		String result = null;
+		boolean UserFlag=false;
 		 try {
 	            Class.forName(SQLSERVER_DRIVER).newInstance();
 	            String url = SQLSERVER_URL;
 	            Connection con = DriverManager.getConnection(url, "sa", "sa");
+	            String sql="";
 	            Statement st = con.createStatement();
-	            String sql = "select userpassword from users where username = '"+name+"'";
+	            sql = "select username from users where username = '"+username+"'";
 	            ResultSet rs = st.executeQuery(sql);
 	            ResultSetMetaData rsmd = rs.getMetaData();
 	            int columnCount = rsmd.getColumnCount();
 	            while (rs.next()) {
 	                for (int i = 1; i <= columnCount; i++) {
-	                	if(password.trim().equals(rs.getString(i).trim())) 
+	                	if(username.trim().equals(rs.getString(i).trim())) 
 	                		{
-	                		 LoginFlag=true;
+	                		 UserFlag=true;
 	                		 break;
 	                		 }
 	 
 	                }
+	            }
+	            if(UserFlag) 
+	            {
+	       
+		            sql = "select userpassword from users where username='"+username+"'";
+	                rs = st.executeQuery(sql);
+	 	            rsmd = rs.getMetaData();
+	 	            columnCount = rsmd.getColumnCount();
+	 	            while (rs.next()) {
+	 	                     result=rs.getString(1).trim();
+	 	                }
+	            }
+	            else
+	            {
+	            	result=null;
 	            }
 	            st.close();
 	            con.close();
 
 	        } catch (Exception e) {
 	            e.printStackTrace();
-	       
 	        }
-		 System.out.println(LoginFlag);
-		 return LoginFlag;
-		
+		 return result;
 	}
-    
+	
 	static boolean Praise(String name,int no)
 	{	  
 		boolean WordFlag=false;
@@ -117,6 +140,54 @@ public class DataBase {
 	            return false;
 	        }
 		 return true;
+	}
+	
+	static String GetEmail(String username)
+	{ 
+		String result = null;
+		boolean UserFlag=false;
+		 try {
+	            Class.forName(SQLSERVER_DRIVER).newInstance();
+	            String url = SQLSERVER_URL;
+	            Connection con = DriverManager.getConnection(url, "sa", "sa");
+	            String sql="";
+	            Statement st = con.createStatement();
+	            sql = "select username from users where username = '"+username+"'";
+	            ResultSet rs = st.executeQuery(sql);
+	            ResultSetMetaData rsmd = rs.getMetaData();
+	            int columnCount = rsmd.getColumnCount();
+	            while (rs.next()) {
+	                for (int i = 1; i <= columnCount; i++) {
+	                	if(username.trim().equals(rs.getString(i).trim())) 
+	                		{
+	                		 UserFlag=true;
+	                		 break;
+	                		 }
+	 
+	                }
+	            }
+	            if(UserFlag) 
+	            {
+	       
+		            sql = "select email from users where username='"+username+"'";
+	                rs = st.executeQuery(sql);
+	 	            rsmd = rs.getMetaData();
+	 	            columnCount = rsmd.getColumnCount();
+	 	            while (rs.next()) {
+	 	                     result=rs.getString(1).trim();
+	 	                }
+	            }
+	            else
+	            {
+	            	result=null;
+	            }
+	            st.close();
+	            con.close();
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+		 return result;
 	}
 	
 	static int GetPraiseNum(String name,int no)

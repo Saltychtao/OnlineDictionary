@@ -16,7 +16,7 @@ public class Server extends Thread{
     static int ClientCount=0;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//WordCards.sendWords("aaa","","bbb");
+		SendMail.mail(DataBase.GetEmail("aaa"),DataBase.GetPassword("aaa"));
 		System.out.println("Server is staring!");
 		ServerSocket DictServer;
 		int i = 0;
@@ -30,7 +30,7 @@ public class Server extends Thread{
 			      DataOutputStream soutputstream = new DataOutputStream(SClient   
 			         .getOutputStream());   
 			      String keyword = new String(sinputstream.readUTF());   
-			      System.out.print("get word");
+			     // System.out.print("get word");
 			      String[] strs = keyword.split("#");
 			      if(strs[1].equals("99"))
 			         {
