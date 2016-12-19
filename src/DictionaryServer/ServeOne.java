@@ -32,11 +32,17 @@ public class ServeOne extends Thread{
 		  {    
 		    while ( i < 100) 
 		    { 
+		      WordCards.test();
 		      Socket SClient = socket.accept();   
 		      DataInputStream sinputstream = new DataInputStream(SClient   
 		         .getInputStream());   
 		      DataOutputStream soutputstream = new DataOutputStream(SClient   
 		         .getOutputStream());   
+		     /* if(WordCards.getPort()==(4500+ClientID))
+		      {
+		    	  soutputstream.writeUTF("#4#"+WordCards.getWordSend()+"#"+WordCards.getSource());  
+		    	  WordCards.sendFinished();
+		      }*/
 		      String keyword = new String(sinputstream.readUTF());   
 		      System.out.print("get word");
 		      String[] strs = keyword.split("#");
@@ -49,9 +55,13 @@ public class ServeOne extends Thread{
 		      else if (strs[1].equals("1"))
 		        { 
 		    	  if(DataBase.SignIn(strs[2],strs[3]))
-		        	soutputstream.writeUTF("#1#login success");
+		        	{
+		    		  soutputstream.writeUTF("#1#login success");
+		        	  WordCards.insert(strs[2], String.valueOf(4500+ClientID));
+		        	}
 		    	  else
 		    	    soutputstream.writeUTF("#1#user name or password error"); 
+		    	
 		        	
 		        }
 		      else if (strs[1].equals("2"))
@@ -66,10 +76,10 @@ public class ServeOne extends Thread{
 		    	    }
 		    	    else
 		    	    { 
-		        	soutputstream.writeUTF("#2#3"+"");
+		        	     soutputstream.writeUTF("#2#3"+BingMain.BingTranslate(strs[3]));
 		    	    }
 		        }
-		      else if (strs[0].equals("3"))
+		      else if (strs[1].equals("3"))
 		        {	
 		    	    if(strs[2].equals("1"))
 		    	    {
@@ -85,13 +95,17 @@ public class ServeOne extends Thread{
 		    	    }
 		        	soutputstream.writeUTF("#3#"+strs[3]+"praise successfully");
 		        }
+		      else if (strs[1].equals("4"))
+		        {	
+                    WordCards.sendWords(strs[2],strs[3],strs[4]);
+		        	soutputstream.writeUTF("#4# send word card successfully");
+		        }
 		      sinputstream.close();   
 		      soutputstream.close();   
 		      SClient.close();
 		      i++;
 		      
 		     }
-		   
 		    socket.close();
 		    } 
 		    catch(IOException e)   

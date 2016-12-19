@@ -10,10 +10,13 @@ import java.net.Socket;
 import java.util.Scanner;
 import java.io.IOException;
 
+import org.apache.commons.httpclient.HttpException;
+
 public class Server extends Thread{
     static int ClientCount=0;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		//WordCards.sendWords("aaa","","bbb");
 		System.out.println("Server is staring!");
 		ServerSocket DictServer;
 		int i = 0;
